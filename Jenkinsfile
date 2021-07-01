@@ -15,7 +15,7 @@ pipeline {
              echo 'This will run only if successful'  
          }  
          failure {  
-             mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL : ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project Name -> ${env.JOB_NAME}", to: "reshi.reshika@gmail.com" , "nanichowdary9@gmail.com";  
+             mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL : ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project Name -> ${env.JOB_NAME}", to: "reshi.reshika@gmail.com";  
          }  
          unstable {  
              echo 'This will run only if the run was marked as unstable'  
