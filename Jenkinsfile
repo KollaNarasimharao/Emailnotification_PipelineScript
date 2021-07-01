@@ -14,14 +14,20 @@ pipeline {
          success {  
              echo 'This will run only if successful'  
          }  
-         failure {  
-             mail bcc: '',body: "<b>Status:</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER}<br> URL: ${env.BUILD_URL}", 
-                  cc: '', charset: 'UTF-8', 
-                  from: '', mimeType: 'text/html', 
-                  replyTo: '', 
-                  subject:Status: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'", 
-                  to: "nanichowdary9@gmail.com";  
-         }  
+         failure {
+      slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+
+      hipchatSend (color: 'RED', notify: true,
+          message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
+        )
+
+      email (
+          subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+          body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+          recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+        )
+    } 
          unstable {  
              echo 'This will run only if the run was marked as unstable'  
          }  
