@@ -14,13 +14,8 @@ pipeline {
          success {  
              echo 'This will run only if successful'  
          }  
-         failure {
-      slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-
-      hipchatSend (color: 'RED', notify: true,
-          message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
-        )
-
+     failure {
+      
       email (
           subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
           body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
