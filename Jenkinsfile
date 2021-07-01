@@ -16,12 +16,7 @@ pipeline {
          }  
      failure {
                           
-          email {
-               subject: """FAILED:'${env.JOB_NAME} [${env.BUILD_NUMBER}]'""",
-                  body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-                        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-                    to: 'nanichowdary9@gmail.com.com',
-    recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+         mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject:Status: Failed -> Job: ${env.JOB_NAME} -> Build Number: ${env.BUILD_NUMBER}", to: "nanichowdary9@gmail.com";
           }
     } 
          unstable {  
